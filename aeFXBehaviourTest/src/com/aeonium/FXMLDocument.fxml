@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="426.0" prefWidth="534.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.aeonium.FXMLDocumentController">
+  <children>
+    <SplitPane dividerPositions="0.6593137254901961" orientation="VERTICAL" VBox.vgrow="ALWAYS">
+      <items>
+        <TabPane id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
+          <tabs>
+            <Tab id="tabGrabber" text="System.out Grabber">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <Button fx:id="button" onAction="#handleButtonAction" text="Click Me!" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab id="tabAutocomplete" text="Autocomplete">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <TextField fx:id="tfAutoComplete1" layoutX="20.0" layoutY="20.0" />
+                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="25.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 1" wrapText="true" />
+                    <TextField fx:id="tfAutoComplete2" layoutX="20.0" layoutY="80.0" />
+                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="85.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 1" wrapText="true" />
+                    <TextField fx:id="tfAutoComplete3" layoutX="20.0" layoutY="140.0" />
+                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="145.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 2" wrapText="true" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Context Menu">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+          </tabs>
+        </TabPane>
+        <TextArea fx:id="textArea" prefHeight="200.0" prefWidth="200.0" />
+      </items>
+    </SplitPane>
+    <Label fx:id="label" layoutX="126" layoutY="120" minHeight="16" minWidth="69" VBox.vgrow="NEVER" />
+  </children>
+</VBox>

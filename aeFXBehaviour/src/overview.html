@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--
+Copyright (C) 2015 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+
+This library is free software; you can redistribute it and/or
+modify it under the terms of the GNU Lesser General Public
+License as published by the Free Software Foundation; either
+version 2.1 of the License, or (at your option) any later version.
+
+This library is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Lesser General Public License for more details.
+
+You should have received a copy of the GNU Lesser General Public
+License along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301  USA
+-->
+<html>
+  <head>
+    <title>aeFXBehaviour Library</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div>
+      <p>This is an addition to the aeFXActions framework that allows for
+        declaratively adding behaviour to your FXML GUI.
+      </p>
+
+      <h2>Bootstrapping</h2>
+      <p>There is no difference in the bootstrapping if you want to use this 
+        library. Just follow the bootstrapping advices for the aeFXActions 
+        framework:
+      </p>
+      <p>Compared to ordinary JavaFX applications with FXML UI, there are just a
+        few steps to get started with FXML and the aeFXActions framework.</p>
+      <p>The framework uses the controller factory callback of the FXMLLoader.
+        So, you (merely) have to tell the FXMLLoader that loads your FXML files
+        to use the FXActionManager as a controller factory. The followin example 
+        illustrates the application initialization with aeFXActions:
+      </p>
+
+      <pre>
+  public void start(Stage stage) throws Exception {
+    FXActionManager myActionControllerFactory = new FXActionManager();
+
+    // Shortcut, if you have a fxml without stylesheets
+    //Parent root = FXMLLoader.load(
+    //        getClass().getResource("FXMLDocument.fxml"),
+    //        null,
+    //        null, myActionControllerFactory);
+
+    // use this approach if the fxml uses stylesheets:
+    FXMLLoader fxmlLoader = new FXMLLoader();
+    fxmlLoader.setLocation(getClass().getResource("FXMLDocument.fxml"));
+    fxmlLoader.setControllerFactory(myActionControllerFactory);
+    Parent root = (Parent) fxmlLoader.load();
+
+    myActionControllerFactory.initActions();
+
+    // optional: get the action by its type and parametrize it:
+    MyAction action = myActionControllerFactory.getAction(MyAction.class);
+    action.setText("Erste Aktion");
+
+    Scene scene = new Scene(root);
+
+    stage.setScene(scene);
+    stage.show();
+  }
+ 
+      </pre>
+    </div>
+  </body>
+</html>
