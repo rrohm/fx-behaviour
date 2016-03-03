@@ -28,14 +28,11 @@
  */
 package com.aeonium;
 
-import static com.aeonium.javafx.AssertFX.*;
-import com.aeonium.javafx.FXHelper;
 import com.aeonium.javafx.actions.FXActionManager;
 import com.aeonium.javafx.behaviour.interaction.AutoCompleteBehaviour;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,6 +40,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import org.aeonium.javafx.AssertFX;
+import static org.aeonium.javafx.AssertFX.assertNotShowing;
+import static org.aeonium.javafx.AssertFX.assertSelected;
+import static org.aeonium.javafx.AssertFX.assertShowing;
+import org.aeonium.javafx.FXHelper;
+import org.aeonium.javafx.FXUnit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -65,21 +68,9 @@ public class FXMLDocumentControllerTest {
 
   @BeforeClass
   public static void setUpClass() {
-    Thread t = new Thread("JavaFX Init Thread") {
-      public void run() {
-        Application.launch(MyDummyApp.class, new String[0]);
-      }
-    };
-    t.setDaemon(true);
-    t.start();
-
-    try {
-      Thread.sleep(1000);
-    } catch (InterruptedException ex) {
-      Logger.getLogger(FXMLDocumentControllerTest.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
+    FXUnit.init();
   }
+
 
   @AfterClass
   public static void tearDownClass() throws InterruptedException {

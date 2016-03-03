@@ -16,7 +16,7 @@
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
-                    <Button fx:id="button" onAction="#handleButtonAction" text="Click Me!" />
+                    <Button fx:id="button" layoutX="18.0" layoutY="15.0" onAction="#handleButtonAction" text="Print to Console ..." />
                   </children>
                 </AnchorPane>
               </content>

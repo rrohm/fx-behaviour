@@ -8,9 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="aeFXBehaviourTest.jar" size="7697" download="eager" />
-    <jar href="lib/aeFXActions.jar" size="114789" download="eager" />
-    <jar href="lib/aeFXBehaviour.jar" size="26368" download="eager" />
+    <jar href="aeFXBehaviourTest.jar" size="7738" download="eager" />
+    <jar href="lib/aeFXActions.jar" size="115035" download="eager" />
+    <jar href="lib/aeFXBehaviour.jar" size="57288" download="eager" />
   </resources>
 <security>
   <all-permissions/>

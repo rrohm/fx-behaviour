@@ -32,6 +32,7 @@ import com.aeonium.behaviours.MyCustomAutocompleteBehaviour;
 import com.aeonium.behaviours.MyCustomBehaviour;
 import com.aeonium.javafx.behaviour.FXBehaviour;
 import com.aeonium.javafx.behaviour.interaction.AutoCompleteBehaviour;
+import com.aeonium.javafx.behaviour.system.GrabSystemOutBehaviour;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -58,7 +59,7 @@ public class FXMLDocumentController implements Initializable {
   private Button button;
 
   @FXML
-//  @FXBehaviour(behaviour = GrabSystemOutBehaviour.class)
+  @FXBehaviour(behaviour = GrabSystemOutBehaviour.class)
   private TextArea textArea;
 
   @FXML

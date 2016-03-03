@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2016 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -44,7 +44,7 @@ public class AutoCompleteBehaviour extends FXAbstractBehaviour {
 
   /**
    * The popup node - it contains the list view component and is maintained only
-   * once. Also, derived classes must reuse this instance.
+   * once, thus, also derived classes must reuse this instance.
    */
   public static Popup popup = null;
   /**
