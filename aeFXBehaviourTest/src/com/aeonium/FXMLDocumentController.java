@@ -31,7 +31,10 @@ package com.aeonium;
 import com.aeonium.behaviours.MyCustomAutocompleteBehaviour;
 import com.aeonium.behaviours.MyCustomBehaviour;
 import com.aeonium.javafx.behaviour.FXBehaviour;
+import com.aeonium.javafx.behaviour.FXBehaviours;
 import com.aeonium.javafx.behaviour.interaction.AutoCompleteBehaviour;
+import com.aeonium.javafx.behaviour.stage.DragWindowBehaviour;
+import com.aeonium.javafx.behaviour.stage.HideOnEscapeBehaviour;
 import com.aeonium.javafx.behaviour.system.GrabSystemOutBehaviour;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -71,8 +74,18 @@ public class FXMLDocumentController implements Initializable {
   private TextField tfAutoComplete2;
 
   @FXML
-  @FXBehaviour(behaviour = MyCustomAutocompleteBehaviour.class)
+  @FXBehaviours({
+    @FXBehaviour(behaviour = MyCustomAutocompleteBehaviour.class)
+  })
   private TextField tfAutoComplete3;
+  
+  @FXML
+  @FXBehaviour(behaviour = HideOnEscapeBehaviour.class)
+  private Button btHideOnEscape;
+  
+  @FXML
+  @FXBehaviour(behaviour = DragWindowBehaviour.class)
+  private Label lbDragWindow;
 
   @FXML
   private void handleButtonAction(ActionEvent event) {

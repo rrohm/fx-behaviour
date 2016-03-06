@@ -29,6 +29,8 @@
 package com.aeonium;
 
 import com.aeonium.javafx.actions.FXActionManager;
+import java.util.logging.LogManager;
+import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -43,7 +45,7 @@ import javafx.stage.Stage;
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
 public class AeFXBehaviourTest extends Application {
-
+  
   /**
    * The controller component of the aeFXActions/aeFXBehaviour frameworks, takes
    * care of initializing, injecting and managing all action and behaviour

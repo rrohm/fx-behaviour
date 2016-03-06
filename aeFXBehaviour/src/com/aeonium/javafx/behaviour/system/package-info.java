@@ -17,7 +17,7 @@
  * MA 02110-1301  USA
  */
 /**
- * Behaviour concerning basic JVM topics, sutch as redirecting
+ * Behaviour concerning basic JVM topics, such as redirecting
  * <code>System.out</code> to a JavaFX text area component etc. 
  */
 package com.aeonium.javafx.behaviour.system;

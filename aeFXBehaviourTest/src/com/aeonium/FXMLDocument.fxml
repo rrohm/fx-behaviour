@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
@@ -26,11 +27,24 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                   <children>
                     <TextField fx:id="tfAutoComplete1" layoutX="20.0" layoutY="20.0" />
-                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="25.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 1" wrapText="true" />
+                    <Label alignment="TOP_LEFT" layoutX="230.0" layoutY="25.0" prefHeight="31.0" prefWidth="270.0" text="TextField with Autocomplete-Behaviour 1" wrapText="true" />
                     <TextField fx:id="tfAutoComplete2" layoutX="20.0" layoutY="80.0" />
-                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="85.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 1" wrapText="true" />
+                    <Label alignment="TOP_LEFT" layoutX="230.0" layoutY="85.0" prefHeight="31.0" prefWidth="270.0" text="TextField with Autocomplete-Behaviour 2" wrapText="true" />
                     <TextField fx:id="tfAutoComplete3" layoutX="20.0" layoutY="140.0" />
-                    <Label alignment="TOP_LEFT" layoutX="250.0" layoutY="145.0" prefHeight="31.0" prefWidth="270.0" text="TextField mit Autocomplete-Behaviour 2" wrapText="true" />
+                    <Label alignment="TOP_LEFT" layoutX="230.0" layoutY="145.0" prefHeight="31.0" prefWidth="270.0" text="TextField with Autocomplete-Behaviour 3" wrapText="true" />
+                  </children>
+                </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Stage &amp; Window">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                    <Button fx:id="btHideOnEscape" layoutX="18.0" layoutY="15.0" text="Set focus and press ESCAPE" />
+                    <Text fontSmoothingType="LCD" layoutX="247.0" layoutY="32.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Normally, you would apply the HideOnEscapeBehaviour class on the main container of the UI or on the root node of the scene. &#10;" wrappingWidth="247.0" />
+                    
+                    <Label fx:id="lbDragWindow" text="Grab &amp; drag Window" wrapText="true" prefWidth="50"
+                           layoutX="18" layoutY="80" />  
                   </children>
                 </AnchorPane>
               </content>
