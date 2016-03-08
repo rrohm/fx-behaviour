@@ -6,4 +6,4 @@ The fx-behaviour library is a utility for declaratively defining the behaviour o
 + We do not want redundant implementations
 + There is a better way than imperative wiring
 
-This library is an extension to the fx-actions library.
+This library is an extension to the fx-actions library. The fx-actions library and the fx-behaviour library will be always developed parallel, so you will always find matching versions in the github repositories.
