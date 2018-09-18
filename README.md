@@ -8,7 +8,7 @@ The fx-behaviour library is a utility for declaratively defining the behaviour o
 
 = example
 Behaviour can be attached to a node simply by annotating it in the controller class. This might look like: 
-'''
+```java
 @FXML
   @FXBehaviour(behaviour = MyCustomBehaviour.class)
   private Label label;
@@ -72,6 +72,6 @@ Behaviour can be attached to a node simply by annotating it in the controller cl
   @FXML
   @FXBehaviour(behaviour = HoverScaleBehaviour.class)
   private Label nodeHoverScale1;
-  '''
+```
 
 This library is an extension to the fx-actions library. The fx-actions library and the fx-behaviour library will be always developed parallel, so you will always find matching versions in the github repositories.
