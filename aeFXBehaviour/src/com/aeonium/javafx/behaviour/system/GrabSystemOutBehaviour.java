@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2018 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -37,11 +37,16 @@ public class GrabSystemOutBehaviour extends FXAbstractBehaviour {
   /**
    * Keep references on the original print stream.
    */
-  private PrintStream oldOut = System.out;
+  private final PrintStream oldOut;
   /**
    * Keep references on the original print stream.
    */
-  private PrintStream oldErr = System.err;
+  private final PrintStream oldErr;
+
+  public GrabSystemOutBehaviour() {
+    this.oldOut = System.out;
+    this.oldErr = System.err;
+  }
 
   /**
    * Custom binding mechanism, since for this behaviour no event listeners are
@@ -71,5 +76,4 @@ public class GrabSystemOutBehaviour extends FXAbstractBehaviour {
       throw new UnsupportedBehaviourTargetException(node, this, "SystemOutGrabber only suppors TextArea. ");
     }
   }
-
 }

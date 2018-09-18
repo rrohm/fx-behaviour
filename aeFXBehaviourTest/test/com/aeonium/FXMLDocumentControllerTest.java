@@ -24,7 +24,7 @@
  *  permits.
  * 
  *
- *  2015 Aeonium Software Systems, Robert Rohm.
+ *  2018 Aeonium Software Systems, Robert Rohm.
  */
 package com.aeonium;
 
@@ -40,12 +40,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.aeonium.javafx.AssertFX;
-import static org.aeonium.javafx.AssertFX.assertNotShowing;
-import static org.aeonium.javafx.AssertFX.assertSelected;
-import static org.aeonium.javafx.AssertFX.assertShowing;
-import org.aeonium.javafx.FXHelper;
-import org.aeonium.javafx.FXUnit;
+import static org.aeonium.fxunit.AssertFX.assertNotShowing;
+import static org.aeonium.fxunit.AssertFX.assertSelected;
+import static org.aeonium.fxunit.AssertFX.assertShowing;
+import org.aeonium.fxunit.FXHelper;
+import org.aeonium.fxunit.FXUnit;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

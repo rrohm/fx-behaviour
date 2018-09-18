@@ -24,7 +24,7 @@
  *  permits.
  * 
  *
- *  2015 Aeonium Software Systems, Robert Rohm.
+ *  2018 Aeonium Software Systems, Robert Rohm.
  */
 /**
  * Example classes - have a look at the code for getting started.

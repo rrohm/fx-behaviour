@@ -8,9 +8,9 @@
   </information>
   <resources>
     <j2se version="1.6+" java-vm-args="-Djava.util.logging.config.file=logging.properties "  href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="aeFXBehaviourTest.jar" size="8955" download="eager" />
-    <jar href="lib/aeFXActions.jar" size="104982" download="eager" />
-    <jar href="lib/aeFXBehaviour.jar" size="64087" download="eager" />
+    <jar href="aeFXBehaviourTest.jar" size="11307" download="eager" />
+    <jar href="lib/aeFXActions.jar" size="125206" download="eager" />
+    <jar href="lib/aeFXBehaviour.jar" size="95147" download="eager" />
   </resources>
 <security>
   <all-permissions/>

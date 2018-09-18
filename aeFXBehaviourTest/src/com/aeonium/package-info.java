@@ -24,7 +24,7 @@
  *  permits.
  * 
  *
- *  2015 Aeonium Software Systems, Robert Rohm.
+ *  2018 Aeonium Software Systems, Robert Rohm.
  */
 /**
  * JavaFX application for visually/manually testing and exploring the behaviour

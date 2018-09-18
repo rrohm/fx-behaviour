@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2016 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2018 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -60,8 +60,6 @@ public class ContextMenuBehaviour extends FXAbstractBehaviour {
           if (control instanceof TreeTableView) {
             TreeTableView treeTableView = (TreeTableView) control;
             int selectedIndex = treeTableView.getSelectionModel().getSelectedIndex();
-//            System.out.println("selectedIndex: " + selectedIndex);
-//            System.out.println("treeTableView.getFixedCellSize(): " + treeTableView.getFixedCellSize());
 
             y = (int) (selectedIndex * treeTableView.getFixedCellSize());
 
@@ -72,12 +70,6 @@ public class ContextMenuBehaviour extends FXAbstractBehaviour {
               scrollPane.getVvalue();
             }
 
-            // TEST output
-//            int my = MouseInfo.getPointerInfo().getLocation().y;
-//
-//            double tpy = control.getLocalToParentTransform().getTy();
-//            double ty = control.getLocalToSceneTransform().getTy();
-//            System.out.printf("ty %f, tpy %f, my %d  \n", ty, tpy, my);
             contextMenu.show(control, 0, y);
           } else {
 
