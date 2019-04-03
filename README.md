@@ -6,7 +6,9 @@ The fx-behaviour library is a utility for JavaFX 11 that allows for declarativel
 + We do not want redundant implementations
 + There is a better way than imperative wiring
 
-= example
+Examples
+--------
+
 Behaviour can be attached to a node simply by annotating it in the controller class. This might look like: 
 ```java
 
