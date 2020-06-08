@@ -21,7 +21,7 @@ package com.aeonium.javafx.behaviour.transition;
 import com.aeonium.javafx.behaviour.FXAbstractBehaviour;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.Node;
 import javafx.util.Duration;
@@ -30,21 +30,21 @@ import javafx.util.Duration;
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
-public class FadeInOnVisible extends FXAbstractBehaviour {
+public class ScaleYOnVisible extends FXAbstractBehaviour {
 
-  private static final Logger LOG = Logger.getLogger(FadeInOnVisible.class.getName());
+  private static final Logger LOG = Logger.getLogger(ScaleYOnVisible.class.getName());
 
-  private int duration = 500;
+  private int duration = 100;
   private int delay = 0;
   private boolean isSequential;
-  private FadeTransition fadeTransition;
+  private ScaleTransition scaleTransition;
   private boolean isInAction = false;
 
   @Override
   public void bind(Node node, Mode assignmentMode) {
     super.bind(node, assignmentMode);
     if (node == null) {
-      throw new NullPointerException("node for FadeInOnVisible behaviour does not exist!");
+      throw new NullPointerException("node for ScaleYOnVisible behaviour does not exist!");
     }
 
     if (node.visibleProperty().isBound()) {
@@ -62,27 +62,27 @@ public class FadeInOnVisible extends FXAbstractBehaviour {
           if (!node.visibleProperty().isBound()) {
             node.setVisible(true);
           }
-          fadeTransition = new FadeTransition(Duration.millis(duration), node);
-          fadeTransition.setDelay(Duration.millis(delay));
-          fadeTransition.setFromValue(node.getOpacity());
-          fadeTransition.setToValue(1.0);
-          fadeTransition.play();
+          scaleTransition = new ScaleTransition(Duration.millis(duration), node);
+          scaleTransition.setDelay(Duration.millis(delay));
+          scaleTransition.setFromY(0.0);
+          scaleTransition.setToY(1.0);
+          scaleTransition.play();
         } else {
           stopTransition();
           
           if (!node.visibleProperty().isBound()) {
             node.setVisible(true);
           }
-          fadeTransition = new FadeTransition(Duration.millis(duration), node);
-          fadeTransition.setDelay(Duration.millis(delay));
-          fadeTransition.setFromValue(node.getOpacity());
-          fadeTransition.setToValue(0);
-          fadeTransition.setOnFinished((event) -> {
+          scaleTransition = new ScaleTransition(Duration.millis(duration), node);
+          scaleTransition.setDelay(Duration.millis(delay));
+          scaleTransition.setFromY(1);
+          scaleTransition.setToY(0);
+          scaleTransition.setOnFinished((event) -> {
             if (!node.visibleProperty().isBound()) {
-              node.setVisible(false);
+//              node.setVisible(false);
             }
           });
-          fadeTransition.play();
+          scaleTransition.play();
         }
       } finally {
         isInAction = false;
@@ -91,9 +91,9 @@ public class FadeInOnVisible extends FXAbstractBehaviour {
   }
 
   private void stopTransition() {
-    if (this.fadeTransition != null) {
-      this.fadeTransition.stop();
-      this.fadeTransition = null;
+    if (this.scaleTransition != null) {
+      this.scaleTransition.stop();
+      this.scaleTransition = null;
     }
   }
 

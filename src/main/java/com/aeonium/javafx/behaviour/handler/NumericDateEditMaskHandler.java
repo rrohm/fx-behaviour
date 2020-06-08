@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2019 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,13 +22,13 @@ import com.aeonium.javafx.actions.exceptions.TextInputControlRequiredException;
 import com.aeonium.javafx.behaviour.annotations.FXEditMask;
 import java.lang.reflect.Field;
 import java.text.DateFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -44,16 +44,17 @@ public class NumericDateEditMaskHandler extends EditMaskHandlerBase {
 
   @Override
   public void handle(Object controller, Field field, FXEditMask annotation) {
-    if (annotation.mask().isEmpty()) {
+    final String mask = annotation.mask();
+    if (mask.isEmpty()) {
       LOG.log(Level.SEVERE, "Field {0} is annotated with @{1}, but with an emtpy edit mask?",
               new Object[]{field.getName(), FXEditMask.class.getSimpleName()});
       return;
     }
     final DateFormat dateFormat;
     try {
-      dateFormat = new SimpleDateFormat(annotation.mask());
+      dateFormat = new SimpleDateFormat(mask);
     } catch (IllegalArgumentException e) {
-      LOG.log(Level.SEVERE, "Illegal date pattern: {0} on field {1}", new Object[]{annotation.mask(), field.getName()});
+      LOG.log(Level.SEVERE, "Illegal date pattern: {0} on field {1}", new Object[]{mask, field.getName()});
       return;
     }
 
@@ -62,80 +63,7 @@ public class NumericDateEditMaskHandler extends EditMaskHandlerBase {
       if (control instanceof TextInputControl) {
         TextInputControl textInputControl = (TextInputControl) control;
 
-        textInputControl.addEventFilter(KeyEvent.ANY, (event) -> {
-          final TextInputControl t = (TextInputControl) event.getTarget();
-
-          // swallow delete events: 
-          if (event.getCode().equals(KeyCode.BACK_SPACE)
-                  || event.getCode().equals(KeyCode.DELETE)) {
-            event.consume();
-            return;
-          }
-          // skip ENTER events: 
-          if (event.getCode().equals(KeyCode.ENTER)) {
-            return;
-          }
-
-          if (event.getCode().equals(KeyCode.UP)) {
-            if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-              try {
-                int anchor = Math.min(t.getAnchor(), t.getCaretPosition());
-                Date date = dateFormat.parse(t.getText());
-                date = rollDateUp(annotation.mask(), t, date, 1);
-                t.setText(dateFormat.format(date));
-                t.selectRange(anchor, anchor);
-                event.consume();
-              } catch (ParseException ex) {
-                LOG.log(Level.SEVERE, null, ex);
-              }
-            }
-            event.consume();
-          }
-          if (event.getCode().equals(KeyCode.DOWN)) {
-            if (event.getEventType().equals(KeyEvent.KEY_PRESSED)) {
-              try {
-                int anchor = Math.min(t.getAnchor(), t.getCaretPosition());
-                Date date = dateFormat.parse(t.getText());
-                date = rollDateUp(annotation.mask(), t, date, -1);
-                t.setText(dateFormat.format(date));
-                t.selectRange(anchor, anchor);
-                event.consume();
-              } catch (ParseException ex) {
-                LOG.log(Level.SEVERE, null, ex);
-              }
-            }
-            event.consume();
-          }
-
-          if (KeyEvent.KEY_TYPED.equals(event.getEventType())) {
-            // swallow non-numeric input:
-            if (!Character.isDigit(event.getCharacter().charAt(0))) {
-              event.consume();
-            } else {
-              int anchor = Math.min(t.getAnchor(), t.getCaretPosition());
-              if (isReplacableChar(annotation.mask().charAt(anchor))) {
-                t.setText(t.getText().substring(0, anchor) + event.getCharacter() + t.getText().substring(anchor + 1, t.getText().length()));
-
-                if (anchor < annotation.mask().length() - 1) {
-                  if (isReplacableChar(annotation.mask().charAt(anchor + 1))) {
-                    int pos = Math.min(t.getText().length(), anchor + 1);
-                    t.selectRange(pos, pos);
-                  } else {
-                    int pos = Math.min(t.getText().length(), anchor + 2);
-                    t.selectRange(pos, pos);
-                  }
-                } else {
-                  int pos = annotation.mask().length() - 1;
-                  t.selectRange(pos, pos);
-                }
-              } else {
-                t.selectRange(anchor + 1, anchor + 1);
-              }
-              event.consume();
-            }
-          }
-
-        });
+        textInputControl.addEventFilter(KeyEvent.ANY, new DateMaskInputFilter(dateFormat, mask, this));
       } else {
         throw new TextInputControlRequiredException(field);
       }
@@ -145,90 +73,5 @@ public class NumericDateEditMaskHandler extends EditMaskHandlerBase {
     }
   }
 
-  private boolean isReplacableChar(char c) {
-    return c == '_' || c == 'd' || c == 'M' || c == 'y' || c == 'h' || c == 'H' || c == 'm'|| c == 'i';
-  }
-
-  private Date rollDateUp(String mask, TextInputControl t, Date date, int step) {
-    final int anchor = Math.min(t.getAnchor(), t.getCaretPosition());
-    final int dateUnit;
-
-    char charAt = mask.charAt(anchor);
-    switch (charAt) {
-      case 'd':
-        dateUnit = Calendar.DATE;
-        break;
-      case 'M':
-        dateUnit = Calendar.MONTH;
-        break;
-      case 'y':
-        dateUnit = Calendar.YEAR;
-        break;
-      case 'h':
-      case 'H':
-        dateUnit = Calendar.HOUR_OF_DAY;
-        break;
-      case 'm':
-        dateUnit = Calendar.MINUTE;
-        break;
-      case 's':
-        dateUnit = Calendar.SECOND;
-        break;
-      default:
-        if (anchor > 0) {
-          switch (mask.charAt(anchor) - 1) {
-            case 'd':
-              dateUnit = Calendar.DATE;
-              break;
-            case 'M':
-              dateUnit = Calendar.MONTH;
-              break;
-            case 'y':
-              dateUnit = Calendar.YEAR;
-              break;
-            case 'h':
-            case 'H':
-              dateUnit = Calendar.HOUR_OF_DAY;
-              break;
-            case 'm':
-              dateUnit = Calendar.MINUTE;
-              break;
-            case 's':
-              dateUnit = Calendar.SECOND;
-              break;
-            default:
-              throw new AssertionError();
-          }
-        } else {
-          switch (mask.charAt(anchor) + 1) {
-            case 'd':
-              dateUnit = Calendar.DATE;
-              break;
-            case 'M':
-              dateUnit = Calendar.MONTH;
-              break;
-            case 'y':
-              dateUnit = Calendar.YEAR;
-              break;
-            case 'h':
-            case 'H':
-              dateUnit = Calendar.HOUR_OF_DAY;
-              break;
-            case 'm':
-              dateUnit = Calendar.MINUTE;
-              break;
-            case 's':
-              dateUnit = Calendar.SECOND;
-              break;
-            default:
-              throw new AssertionError();
-          }
-        }
-    }
-    final Calendar cal = Calendar.getInstance();
-    cal.setTime(date);
-    cal.add(dateUnit, step);
-    return cal.getTime();
-  }
 
 }
