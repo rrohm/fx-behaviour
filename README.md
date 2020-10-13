@@ -96,7 +96,7 @@ private Label nodeToggleVisibility2;
 private Button buttonWithContextMenu;
 
 /**
-* This label an the following one have a visual effect applied to them.
+* This label and the following one have a visual effect applied to them.
 */
 @FXML
 @FXBehaviour(behaviour = HoverScaleBehaviour.class)
