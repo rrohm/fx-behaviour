@@ -5,3 +5,6 @@ aeFXBehaviour/nbproject/private/**/*
 aeFXBehaviourTest/nbproject/private/**/*
 aeFXBehaviourTest/dist/web-files/**/*
 mounts.sh
+target
+build
+.svn

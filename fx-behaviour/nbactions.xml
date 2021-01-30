@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+  <action>
+    <actionName>run</actionName>
+    <goals>
+      <goal>clean</goal>
+      <goal>package</goal>
+      <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+    </goals>
+    <properties>
+      <runfx.args>-jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
+    </properties>
+  </action>
+  <action>
+    <actionName>debug</actionName>
+    <goals>
+      <goal>clean</goal>
+      <goal>package</goal>
+      <goal>org.codehaus.mojo:exec-maven-plugin:1.2.1:exec</goal>
+    </goals>
+    <properties>
+      <runfx.args>-Xdebug -Xrunjdwp:transport=dt_socket,server=n,address=${jpda.address} -Dglass.disableGrab=true -jar "${project.build.directory}/${project.build.finalName}.jar"</runfx.args>
+      <jpda.listen>true</jpda.listen>
+    </properties>
+  </action>
+  <action>
+    <actionName>CUSTOM-deploy w/o javadoc,test</actionName>
+    <displayName>deploy w/o javadoc,test</displayName>
+    <goals>
+      <goal>deploy</goal>
+    </goals>
+    <properties>
+      <maven.javadoc.skip>true</maven.javadoc.skip>
+      <skipTests>true</skipTests>
+      <altDeploymentRepository>aeonium-intern::default::http://192.168.2.133:8080/repository/aeonium-intern</altDeploymentRepository>
+    </properties>
+  </action>       
+  <action>
+    <actionName>CUSTOM-sonar:sonar</actionName>
+    <displayName>sonar:sonar</displayName>
+    <goals>
+      <goal>clean</goal>
+      <goal>verify</goal>
+      <goal>sonar:sonar</goal>
+    </goals>
+  </action>        
+</actions>
