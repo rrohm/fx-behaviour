@@ -139,7 +139,6 @@ public class OpenYOnVisible extends FXAbstractBehaviour {
     if (this.transition != null) {
       this.transition.stop();
       this.transition = null;
-
     }
   }
 
