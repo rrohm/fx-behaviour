@@ -19,6 +19,7 @@
 package com.aeonium.javafx.behaviour.transition;
 
 import com.aeonium.javafx.behaviour.FXAbstractBehaviour;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -34,7 +35,9 @@ import javafx.scene.layout.Region;
 import javafx.util.Duration;
 
 /**
- * Open and close a node in Y-direction (vertically), toggled by the <pre>Node#disabledProperty</pre>.
+ * Open and close a node in Y-direction (vertically), toggled by the
+ * <pre>Node#disabledProperty</pre>.
+ *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
 public class OpenYOnEnabled extends FXAbstractBehaviour {
@@ -54,22 +57,31 @@ public class OpenYOnEnabled extends FXAbstractBehaviour {
       throw new NullPointerException("node for ScaleYOnVisible behaviour does not exist!");
     }
 
-    this.originalH = ((Region) node).getPrefHeight();
+    if (node instanceof Region) {
+      Region region = (Region) node;
 
-    node.disabledProperty().addListener(new ChangeListener<Boolean>() {
-      @Override
-      public void changed(ObservableValue<? extends Boolean> ov, Boolean oldDisable, Boolean newDisable) {
-        if (handleChange(node, newDisable)) {
-          return;
-        }
+      this.originalH = region.getPrefHeight();
+      region.minHeightProperty().bind(region.maxHeightProperty());
+    }
+
+    node.disabledProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean oldDisable, Boolean newDisable) -> {
+      if (handleChange(node, newDisable)) {
+        return;
       }
     });
-    
+
     this.handleChange(node, node.isDisabled());
   }
 
   public boolean handleChange(Node node, Boolean newDisable) {
-    ((Region) node).setMinHeight(1.0);
+    if (node instanceof Region && this.originalH <= 0) {
+      this.originalH = ((Region) node).getPrefHeight();
+//      if (this.originalH <= 0) {
+//        this.originalH = ((Region) node).getHeight();
+//      }
+    }
+    LOG.log(Level.INFO, "Node: {0}, originalH: {1}", new Object[]{node, this.originalH});
+
     try {
       if (isInAction) {
         return true;
@@ -99,8 +111,10 @@ public class OpenYOnEnabled extends FXAbstractBehaviour {
 
           Timeline timeline = new Timeline();
           timeline.getKeyFrames().addAll(
-                  new KeyFrame(Duration.ZERO, new KeyValue(((Region) node).prefHeightProperty(), 0)),
-                  new KeyFrame(Duration.millis(duration), new KeyValue(((Region) node).prefHeightProperty(), originalH))
+//                  new KeyFrame(Duration.ZERO, new KeyValue(((Region) node).minHeightProperty(), 0)),
+                  new KeyFrame(Duration.ZERO, new KeyValue(((Region) node).maxHeightProperty(), 0)),
+//                  new KeyFrame(Duration.millis(duration), new KeyValue(((Region) node).minHeightProperty(), originalH)),
+                  new KeyFrame(Duration.millis(duration), new KeyValue(((Region) node).maxHeightProperty(), originalH))
           );
 
           transition = new ParallelTransition(scaleTransition, translateTransition, timeline);
@@ -136,13 +150,13 @@ public class OpenYOnEnabled extends FXAbstractBehaviour {
 
           Timeline timeline = new Timeline();
           timeline.getKeyFrames().addAll(
-                  new KeyFrame(Duration.ZERO, new KeyValue(((Region) node).prefHeightProperty(), originalH)),
-                  new KeyFrame(Duration.millis(duration), new KeyValue(((Region) node).prefHeightProperty(), 0))
+                  new KeyFrame(Duration.ZERO, new KeyValue(((Region) node).maxHeightProperty(), originalH)),
+                  new KeyFrame(Duration.millis(duration), new KeyValue(((Region) node).maxHeightProperty(), 0))
           );
 
           transition = new ParallelTransition(
                   scaleTransition,
-                  //                    translateTransition,
+//                  translateTransition,
                   timeline
           );
           transition.setOnFinished((t) -> {
