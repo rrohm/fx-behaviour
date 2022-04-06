@@ -22,6 +22,7 @@ import com.aeonium.javafx.actions.annotations.AnnotationHandler;
 import com.aeonium.javafx.actions.exceptions.NodeTypeRequiredException;
 import com.aeonium.javafx.behaviour.annotations.FXEditMask;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.scene.control.TextInputControl;
@@ -36,7 +37,7 @@ public class EditMaskHandler implements AnnotationHandler<FXEditMask> {
   public void handle(Object controller, Field field, FXEditMask annotation) {
     try {
       Class<? extends EditMaskHandlerBase> type = annotation.type();
-      EditMaskHandlerBase handler = type.newInstance();
+      EditMaskHandlerBase handler = type.getDeclaredConstructor().newInstance();
 
       Object get = field.get(controller);
       if (get instanceof TextInputControl) {
@@ -47,7 +48,7 @@ public class EditMaskHandler implements AnnotationHandler<FXEditMask> {
       }
       handler.handle(controller, field, annotation);
 
-    } catch (InstantiationException | IllegalAccessException ex) {
+    } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException | IllegalArgumentException | InvocationTargetException ex) {
       Logger.getLogger(EditMaskHandler.class.getName()).log(Level.SEVERE, null, ex);
     }
   }
