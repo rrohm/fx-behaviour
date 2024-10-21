@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -45,8 +45,7 @@ public class NumberEditMaskHandler extends EditMaskHandlerBase {
     }
     try {
       Object control = field.get(controller);
-      if (control instanceof TextInputControl) {
-        TextInputControl textInputControl = (TextInputControl) control;
+      if (control instanceof TextInputControl textInputControl) {
 
         textInputControl.addEventFilter(KeyEvent.ANY, (event) -> {
           // swallow delete events: 

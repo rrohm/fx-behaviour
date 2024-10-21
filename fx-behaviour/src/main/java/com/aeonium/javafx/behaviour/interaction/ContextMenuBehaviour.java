@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ public class ContextMenuBehaviour extends FXAbstractBehaviour {
           int y = 0;
 
           if (control instanceof TreeTableView) {
-            TreeTableView treeTableView = (TreeTableView) control;
+            TreeTableView<?> treeTableView = (TreeTableView) control;
             int selectedIndex = treeTableView.getSelectionModel().getSelectedIndex();
 
             y = (int) (selectedIndex * treeTableView.getFixedCellSize());

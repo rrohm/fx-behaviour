@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -58,7 +58,7 @@ public class FXBehaviourService {
    * handler exactly for this type of annotation.
    * @return The new FXActionManager instance.
    */
-  public static FXActionManager getDefaultManager(Map<Class, AnnotationHandler> additionalHandlers) {
+  public static FXActionManager getDefaultManager(Map<Class<?>, AnnotationHandler<?>> additionalHandlers) {
     FXActionManager fxActionManager = new FXActionManager(additionalHandlers);
     fxActionManager.addHandler(FXFadeInOnVisible.class, new FadeInOnVisibleHandler());
     fxActionManager.addHandler(FXEditMask.class, new EditMaskHandler());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -45,7 +45,7 @@ public class CopyToClipboardBehaviour extends FXAbstractBehaviour {
         StringBuilder textContent = new StringBuilder();
         
         if (this.node instanceof ListView) {
-          ListView listView = (ListView) this.node;
+          ListView<?> listView = (ListView) this.node;
           int n = 0;
           for (Object selectedItem : listView.getSelectionModel().getSelectedItems()) {
             if (n > 0) {
@@ -55,7 +55,7 @@ public class CopyToClipboardBehaviour extends FXAbstractBehaviour {
             n++;
           }
         } else if (this.node instanceof TableView) {
-          TableView tableView = (TableView) this.node;
+          TableView<?> tableView = (TableView) this.node;
           int n = 0;
           for (Object selectedItem : tableView.getSelectionModel().getSelectedItems()) {
             if (n > 0) {
@@ -65,7 +65,7 @@ public class CopyToClipboardBehaviour extends FXAbstractBehaviour {
             n++;
           }
         } else if (this.node instanceof TreeView) {
-          TreeView treeView = (TreeView) this.node;
+          TreeView<?> treeView = (TreeView) this.node;
           int n = 0;
           for (Object selectedItem : treeView.getSelectionModel().getSelectedItems()) {
             if (n > 0) {

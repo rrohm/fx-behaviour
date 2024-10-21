@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -27,6 +27,8 @@ import javafx.scene.Node;
 import javafx.util.Duration;
 
 /**
+ * Makes a node scale along the y-axis, if it gets visible, i.e., if it's visibility is switched from <code>false</code>
+ * to <code>true</code>.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
@@ -54,7 +56,7 @@ public class ScaleYOnVisible extends FXAbstractBehaviour {
       if (isInAction) {
         return;
       }
-      
+
       try {
         isInAction = true;
         if (newValue) {
@@ -69,7 +71,7 @@ public class ScaleYOnVisible extends FXAbstractBehaviour {
           scaleTransition.play();
         } else {
           stopTransition();
-          
+
           if (!node.visibleProperty().isBound()) {
             node.setVisible(true);
           }
@@ -97,18 +99,38 @@ public class ScaleYOnVisible extends FXAbstractBehaviour {
     }
   }
 
+  /**
+   * Get the duration of the effect, in milliseconds.
+   *
+   * @return The duration of the effect, in milliseconds-
+   */
   public int getDuration() {
     return duration;
   }
 
+  /**
+   * Set the duration of the effect, in milliseconds.
+   *
+   * @param duration The duration of the effect, in milliseconds-
+   */
   public void setDuration(int duration) {
     this.duration = duration;
   }
 
+  /**
+   * Get the delay time for the effect, in milliseconds. Defaults to 0ms.
+   *
+   * @return The delay time for the effect, in milliseconds.
+   */
   public int getDelay() {
     return delay;
   }
 
+  /**
+   * Set the delay time for the effect, in milliseconds.
+   *
+   * @param delay The delay time for the effect, in milliseconds.
+   */
   public void setDelay(int delay) {
     this.delay = delay;
   }

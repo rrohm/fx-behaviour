@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -25,21 +25,35 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 
+ * Define a smooth "fade-in-on-visible" behaviour on the annotated control, i.e., if the visibility of the control
+ * changes from <code>visible == false</code> to <code>visible == true</code>, it fades in from zero opacity to full
+ * opacity, within a given time, specified in milleseconds. The default duration is 500ms.
+ *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
 @Documented
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FXFadeInOnVisible {
-  
+
   /**
    * The duration in milliseconds, default is 500 ms.
+   *
    * @return The duration in milliseconds.
    */
   public int duration() default 500;
-  
+
+  /**
+   * The delay for the fade-in effect, in milliseconds, defaults to 0.
+   *
+   * @return
+   */
   public int delay() default 0;
-  
+
+  /**
+   * Whether the effect is to be executed sequential, or whether it hast to be executed parallel to other effects.
+   *
+   * @return
+   */
   public boolean sequential() default false;
 }

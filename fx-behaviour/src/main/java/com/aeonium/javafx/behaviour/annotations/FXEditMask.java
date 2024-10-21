@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -26,6 +26,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Annotation for defining edit masks on TextInputControls.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
@@ -33,8 +34,13 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FXEditMask {
-  
-  public String mask(); 
-  
-  public Class<? extends EditMaskHandlerBase> type(); 
+
+  /**
+   * The edit mask.
+   *
+   * @return
+   */
+  public String mask();
+
+  public Class<? extends EditMaskHandlerBase> type();
 }

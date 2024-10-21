@@ -30,13 +30,14 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
+ * Input filter for date masked inputs, lets you roll single digits up or down with the UP or DOWN key.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
 class DateMaskInputFilter implements EventHandler<KeyEvent> {
 
   private static final Logger LOG = Logger.getLogger(DateMaskInputFilter.class.getName());
-  
+
   private final DateFormat dateFormat;
   private final String mask;
   private final NumericDateEditMaskHandler filter;
@@ -126,80 +127,60 @@ class DateMaskInputFilter implements EventHandler<KeyEvent> {
     final int dateUnit;
     char charAt = mask.charAt(anchor);
     switch (charAt) {
-      case 'd':
+      case 'd' ->
         dateUnit = Calendar.DATE;
-        break;
-      case 'M':
+      case 'M' ->
         dateUnit = Calendar.MONTH;
-        break;
-      case 'y':
+      case 'y' ->
         dateUnit = Calendar.YEAR;
-        break;
-      case 'h':
-      case 'H':
+      case 'h', 'H' ->
         dateUnit = Calendar.HOUR_OF_DAY;
-        break;
-      case 'm':
+      case 'm' ->
         dateUnit = Calendar.MINUTE;
-        break;
-      case 's':
+      case 's' ->
         dateUnit = Calendar.SECOND;
-        break;
-      default:
+      default -> {
         if (anchor > 0) {
           switch (mask.charAt(anchor) - 1) {
-            case 'd':
+            case 'd' ->
               dateUnit = Calendar.DATE;
-              break;
-            case 'M':
+            case 'M' ->
               dateUnit = Calendar.MONTH;
-              break;
-            case 'y':
+            case 'y' ->
               dateUnit = Calendar.YEAR;
-              break;
-            case 'h':
-            case 'H':
+            case 'h', 'H' ->
               dateUnit = Calendar.HOUR_OF_DAY;
-              break;
-            case 'm':
+            case 'm' ->
               dateUnit = Calendar.MINUTE;
-              break;
-            case 's':
+            case 's' ->
               dateUnit = Calendar.SECOND;
-              break;
-            default:
+            default ->
               throw new AssertionError();
           }
         } else {
           switch (mask.charAt(anchor) + 1) {
-            case 'd':
+            case 'd' ->
               dateUnit = Calendar.DATE;
-              break;
-            case 'M':
+            case 'M' ->
               dateUnit = Calendar.MONTH;
-              break;
-            case 'y':
+            case 'y' ->
               dateUnit = Calendar.YEAR;
-              break;
-            case 'h':
-            case 'H':
+            case 'h', 'H' ->
               dateUnit = Calendar.HOUR_OF_DAY;
-              break;
-            case 'm':
+            case 'm' ->
               dateUnit = Calendar.MINUTE;
-              break;
-            case 's':
+            case 's' ->
               dateUnit = Calendar.SECOND;
-              break;
-            default:
+            default ->
               throw new AssertionError();
           }
         }
+      }
     }
     final Calendar cal = Calendar.getInstance();
     cal.setTime(date);
     cal.add(dateUnit, step);
     return cal.getTime();
   }
-  
+
 }

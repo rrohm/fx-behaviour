@@ -23,6 +23,8 @@ import javafx.scene.control.ToggleButton;
 import javafx.scene.input.InputEvent;
 
 /**
+ * This behaviour ensures that, within a toggle group, there is always one toggle button active, once the first toggle
+ * button has been pressed. I.e., it prevents a selected toggle button to get deselected.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
@@ -39,15 +41,10 @@ public class ToggleAlwaysOneBehaviour extends FXAbstractBehaviour {
   }
 
   private static void handle(InputEvent event) {
-    
+
     ToggleButton bt = (ToggleButton) event.getSource();
     if (bt.equals(bt.getToggleGroup().getSelectedToggle())) {
-//      if (event.getEventType().equals(MouseEvent.MOUSE_CLICKED)) {
-//        event.consume();
-//      }
-//      if (event.getEventType().equals(MouseEvent.MOUSE_PRESSED)) {
-        event.consume();
-//      }
+      event.consume();
     }
   }
 }

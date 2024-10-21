@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -22,9 +22,10 @@ import com.aeonium.javafx.actions.annotations.AnnotationHandler;
 import com.aeonium.javafx.behaviour.annotations.FXEditMask;
 
 /**
+ * Base type for edit mask behaviours, defined by {@link FXEditMask}.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
-public abstract class EditMaskHandlerBase implements AnnotationHandler<FXEditMask>{
-  
+public abstract class EditMaskHandlerBase implements AnnotationHandler<FXEditMask> {
+
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -40,8 +40,7 @@ public class EditMaskHandler implements AnnotationHandler<FXEditMask> {
       EditMaskHandlerBase handler = type.getDeclaredConstructor().newInstance();
 
       Object get = field.get(controller);
-      if (get instanceof TextInputControl) {
-        TextInputControl textInputControl = (TextInputControl) get;
+      if (get instanceof TextInputControl textInputControl) {
         textInputControl.setText(annotation.mask());
       } else {
         throw new NodeTypeRequiredException("Annotation " + annotation.getClass().getName() + " requires a Node of type javafx.scene.control.TextInputControl or descendants. ", get.getClass());

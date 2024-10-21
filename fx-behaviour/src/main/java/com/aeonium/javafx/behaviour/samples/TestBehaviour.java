@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2020 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
+ * Copyright (C) 2024 Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;.
  *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
@@ -19,10 +19,10 @@
 package com.aeonium.javafx.behaviour.samples;
 
 import com.aeonium.javafx.behaviour.FXAbstractBehaviour;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 
 /**
+ * A simpe test behaviour, prints only a message into sysout.
  *
  * @author Robert Rohm&lt;r.rohm@aeonium-systems.de&gt;
  */
@@ -50,9 +50,9 @@ public class TestBehaviour extends FXAbstractBehaviour {
     this.onMousePressed = TestBehaviour::handle;
     this.onMouseReleased = TestBehaviour::handle;
   }
-  
-  private static void handle(Event event){
+
+  private static void handle(Event event) {
     System.out.printf("TestBehaviour: %s on %s", event.getEventType().getName(), event.getTarget().toString());
   }
-  
+
 }

@@ -38,6 +38,7 @@ public class KeySelectionBehaviour extends FXAbstractBehaviour {
     this.onKeyReleased = KeySelectionBehaviour::handle;
   }
 
+  @SuppressWarnings("unchecked")
   private static void handle(InputEvent event) {
     if (event instanceof KeyEvent) {
       KeyEvent keyEvent = (KeyEvent) event;
@@ -46,10 +47,10 @@ public class KeySelectionBehaviour extends FXAbstractBehaviour {
       String character = keyEvent.getText().toLowerCase();
       if (character != null && !character.isBlank()) {
         Object source = event.getSource();
-        if (source instanceof ChoiceBox) {
-          ChoiceBox choiceBox = (ChoiceBox) source;
+        if (source instanceof ChoiceBox choiceBox) {
           StringConverter converter = choiceBox.getConverter();
           for (Object item : choiceBox.getItems()) {
+            @SuppressWarnings("unchecked")
             String toString = (converter != null) ? converter.toString(item).toLowerCase(): item.toString().toLowerCase();
             if (toString.startsWith(character)) {
               if (item.equals(choiceBox.getSelectionModel().getSelectedItem())
